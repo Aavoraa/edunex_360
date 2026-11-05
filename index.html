@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edunex Smart School 360 — School management software</title>
+<meta name="description" content="Admissions, fees, attendance, academics, transport and parent communication in one school management platform, with AI-assisted paper correction.">
+<meta name="theme-color" content="#0a0909">
+<link rel="icon" type="image/svg+xml" href="assets/logo-gold.svg">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<script>
+  // Apply the saved theme before the page paints.
+  try { var t = localStorage.getItem('edunex-theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  document.documentElement.classList.add('js');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Icon sprite (24x24 stroke icons) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/></symbol>
+    <symbol id="i-id" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="8.5" cy="11" r="2.5"/><path d="M4.5 17.5c.8-1.6 2.3-2.5 4-2.5s2.9.9 3.7 2.5M15 9h5M15 13h5"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21.2l7.7-7.8 1.1-1a5.5 5.5 0 0 0 0-7.8z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-usercheck" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m16 11 2 2 4-4"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></symbol>
+    <symbol id="i-brief" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+    <symbol id="i-bus" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="15" rx="2"/><path d="M4 11h16M8 18v3M16 18v3"/></symbol>
+    <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="m8.2 13.4-1.4 7.2 5.2-2.6 5.2 2.6-1.4-7.2"/></symbol>
+    <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 15l3.5-4 3 2.5L20 7"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Floating pill navigation -->
+<header class="nav">
+  <div class="nav__bar">
+    <a href="#top" class="brand" aria-label="Edunex Smart School 360, back to top">
+      <img src="assets/logo-gold.svg" width="40" height="40" alt="">
+      <span class="brand__text"><span class="brand__name">EDUNEX</span><span class="brand__tag">Smart School 360</span></span>
+    </a>
+    <nav class="nav__links" id="nav-links" aria-label="Sections">
+      <a href="#tour">Product tour</a>
+      <a href="#modules">Modules</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#demo" class="nav__links-cta">Book a demo</a>
+    </nav>
+    <div class="nav__actions">
+      <button type="button" class="iconbtn theme-toggle" aria-label="Switch to light theme">
+        <svg class="ico" width="18" height="18"><use href="#i-sun"/></svg>
+      </button>
+      <a href="#demo" class="btn btn--gold nav__cta">Book a demo</a>
+      <button type="button" class="iconbtn nav__menu" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <svg class="ico" width="20" height="20"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================== HERO ============================== -->
+  <section class="hero" id="top">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>School ERP · Built for Indian schools</p>
+        <h1 class="display">One school.<br><span class="metal">Every record connected.</span></h1>
+        <p class="lead">Admissions, fees, attendance, exams, transport and parent updates in one place, so your office stops chasing spreadsheets and starts seeing what needs attention.</p>
+        <div class="hero__cta">
+          <a href="#demo" class="btn btn--gold">Book a demo <svg class="ico" width="17" height="17"><use href="#i-arrow"/></svg></a>
+          <a href="#pricing" class="btn btn--ghost">See pricing</a>
+        </div>
+        <p class="hero__price">Plans from <b data-from-price>₹12,000</b>/year · priced by student count · GST extra</p>
+        <ul class="chips" aria-label="What you get">
+          <li>Free consultation</li>
+          <li>Written quote</li>
+          <li>Remote setup &amp; training</li>
+          <li>GST invoice</li>
+        </ul>
+      </div>
+
+      <!-- Product mock-up (illustrative) -->
+      <div class="hero__visual" aria-label="Illustration of the admissions workflow">
+        <div class="frame">
+          <div class="frame__bar"><span></span><span></span><span></span><em>Edunex · Admissions</em></div>
+          <div class="frame__body">
+            <aside class="mock-side" aria-hidden="true">
+              <i class="is-on"></i><i></i><i></i><i></i><i></i><i></i>
+            </aside>
+            <div class="mock-main">
+              <div class="mock-head">
+                <div><b>Admission confirmed</b><small>Class 6 · Section B</small></div>
+                <span class="tag tag--ok">Enrolled</span>
+              </div>
+              <div class="mock-kpis">
+                <div><small>Application</small><b>APP-2026-118</b></div>
+                <div><small>First invoice</small><b>₹18,500</b></div>
+                <div><small>Documents</small><b>4 / 4</b></div>
+              </div>
+              <div class="mock-rows">
+                <div><span class="dot dot--gold"></span>Enquiry logged<em>12 Jun</em></div>
+                <div><span class="dot dot--gold"></span>Campus visit &amp; interaction<em>18 Jun</em></div>
+                <div><span class="dot dot--gold"></span>Documents verified<em>21 Jun</em></div>
+                <div><span class="dot"></span>Fee invoice raised<em>Today</em></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phone" aria-hidden="true">
+          <div class="phone__notch"></div>
+          <small>Parent app</small>
+          <b>Fees summary</b>
+          <div class="phone__row"><span>Term 2</span><span>₹18,500</span></div>
+          <div class="phone__row"><span>Paid</span><span class="ok">₹12,000</span></div>
+          <div class="phone__bar"><i style="width:65%"></i></div>
+          <div class="phone__btn">Pay now</div>
+        </div>
+        <ol class="steps-strip">
+          <li class="is-on"><span>01</span>Enquiry</li>
+          <li class="is-on"><span>02</span>Admission</li>
+          <li><span>03</span>Student record</li>
+        </ol>
+        <p class="caption">Illustration with sample data</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="values">
+        <div class="value"><span class="num">01</span><div><h3>Find any record in seconds.</h3><p>Students, parents and admissions linked to one profile.</p></div></div>
+        <div class="value"><span class="num">02</span><div><h3>Keep fees in view.</h3><p>Dues, payments and receipts, always up to date.</p></div></div>
+        <div class="value"><span class="num">03</span><div><h3>Give every role its own view.</h3><p>Staff and families see only what they should.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PRODUCT TOUR ============================ -->
+  <section class="section" id="tour">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">Product tour</p>
+        <h2 class="h2">See how it works.<br><span class="dim">Not just a feature list.</span></h2>
+        <p class="sub">Pick a workflow to see how the school office, teachers and parents use it day to day.</p>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Workflows" data-tabs="tour">
+        <button role="tab" aria-selected="true" aria-controls="tour-1" id="tour-t1"><span>01</span>Admissions</button>
+        <button role="tab" aria-selected="false" aria-controls="tour-2" id="tour-t2" tabindex="-1"><span>02</span>Fees</button>
+        <button role="tab" aria-selected="false" aria-controls="tour-3" id="tour-t3" tabindex="-1"><span>03</span>Attendance</button>
+        <button role="tab" aria-selected="false" aria-controls="tour-4" id="tour-t4" tabindex="-1"><span>04</span>AI correction</button>
+      </div>
+
+      <div class="panel tour" id="tour-1" role="tabpanel" aria-labelledby="tour-t1">
+        <div class="tour__copy">
+          <p class="kicker">From enquiry to enrolment</p>
+          <h3 class="h3">Follow every admission without losing the thread.</h3>
+          <p>Enquiries, follow-ups, documents and the first fee invoice stay on one timeline, so anyone in the office can pick up where a colleague left off.</p>
+          <ul class="ticks">
+            <li><svg class="ico"><use href="#i-check"/></svg>Every application and document in one place</li>
+            <li><svg class="ico"><use href="#i-check"/></svg>A clear record of each enrolment step</li>
+            <li><svg class="ico"><use href="#i-check"/></svg>The first invoice raised straight from admission</li>
+          </ul>
+          <a href="#demo" class="link">See it in a demo <svg class="ico" width="16" height="16"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="screen" aria-hidden="true">
+          <div class="screen__title"><b>Admissions pipeline</b><span class="tag">This term</span></div>
+          <div class="kanban">
+            <div><small>Enquiry · 24</small><i></i><i></i><i></i></div>
+            <div><small>Visit · 11</small><i></i><i></i></div>
+            <div><small>Documents · 7</small><i></i><i></i></div>
+            <div><small>Enrolled · 32</small><i class="gold"></i><i class="gold"></i><i class="gold"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel tour" id="tour-2" role="tabpanel" aria-labelledby="tour-t2" hidden>
+        <div class="tour__copy">
+          <p class="kicker">Fees &amp; receipts</p>
+          <h3 class="h3">Know exactly what is due, and from whom.</h3>
+          <p>Set fee structures by class, collect at the counter or online, print receipts and follow up on dues with a single list.</p>
+          <ul class="ticks">
+            <li><svg class="ico"><use href="#i-check"/></svg>Fee structures, concessions and instalments</li>
+            <li><svg class="ico"><use href="#i-check"/></svg>Printable receipts and a full payment history</li>
+            <li><svg class="ico"><use href="#i-check"/></svg>Dues reports by class, term or student</li>
+          </ul>
+          <a href="#demo" class="link">See it in a demo <svg class="ico" width="16" height="16"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="screen" aria-hidden="true">
+          <div class="screen__title"><b>Fee collection</b><span class="tag">Term 2</span></div>
+          <div class="bars-chart"><i style="height:45%"></i><i style="height:62%"></i><i style="height:58%"></i><i style="height:80%"></i><i style="height:72%"></i><i class="gold" style="height:92%"></i></div>
+          <div class="mini-rows"><div><span>Collected</span><b>₹14.2L</b></div><div><span>Pending</span><b>₹3.1L</b></div><div><span>Receipts today</span><b>46</b></div></div>
+        </div>
+      </div>
+
+      <div class="panel tour" id="tour-3" role="tabpanel" aria-labelledby="tour-t3" hidden>
+        <div class="tour__copy">
+          <p class="kicker">The school day</p>
+          <h3 class="h3">Attendance marked in minutes, seen by everyone who needs it.</h3>
+          <p>Teachers mark attendance from any device. The office sees the day at a glance, and parents are told when their child is absent.</p>
+          <ul class="ticks">
+            <li><svg class="ico"><use href="#i-check"/></svg>Class-wise and student-wise attendance</li>
+            <li><svg class="ico"><use href="#i-check"/></svg>Absence alerts to parents</li>
+            <li><svg class="ico"><use href="#i-check"/></svg>Monthly registers and reports</li>
+          </ul>
+          <a href="#demo" class="link">See it in a demo <svg class="ico" width="16" height="16"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="screen" aria-hidden="true">
+          <div class="screen__title"><b>Class 8 · A</b><span class="tag tag--ok">Marked</span></div>
+          <div class="att-grid">
+            <i></i><i></i><i></i><i class="off"></i><i></i><i></i><i></i><i></i>
+            <i></i><i></i><i></i><i></i><i></i><i class="off"></i><i></i><i></i>
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <div class="mini-rows"><div><span>Present</span><b>38</b></div><div><span>Absent</span><b>2</b></div><div><span>Parents notified</span><b>2</b></div></div>
+        </div>
+      </div>
+
+      <div class="panel tour" id="tour-4" role="tabpanel" aria-labelledby="tour-t4" hidden>
+        <div class="tour__copy">
+          <p class="kicker">AI paper correction</p>
+          <h3 class="h3">Hours of marking, back in teachers’ hands.</h3>
+          <p>Upload scanned answer sheets. The AI reads the handwriting, checks each answer against the marking scheme and suggests a mark with its reason.</p>
+          <ul class="ticks">
+            <li><svg class="ico"><use href="#i-check"/></svg>Teachers approve or change every mark</li>
+            <li><svg class="ico"><use href="#i-check"/></svg>Aware of the board and the paper pattern</li>
+            <li><svg class="ico"><use href="#i-check"/></svg>Results flow straight into report cards</li>
+          </ul>
+          <a href="#demo" class="link">See it in a demo <svg class="ico" width="16" height="16"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="screen" aria-hidden="true">
+          <div class="screen__title"><b>Q3 · Explain photosynthesis</b><span class="tag tag--gold">Suggested 4 / 5</span></div>
+          <div class="sheet-lines"><i style="width:92%"></i><i style="width:78%"></i><i style="width:86%"></i><i style="width:54%"></i></div>
+          <div class="note"><svg class="ico" width="15" height="15"><use href="#i-sparkle"/></svg>Covers light and chlorophyll; misses the role of carbon dioxide.</div>
+        </div>
+      </div>
+      <p class="caption center">Illustrations with sample data</p>
+    </div>
+  </section>
+
+  <!-- ============================== MODULES ============================== -->
+  <section class="section section--raised" id="modules">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">Modules</p>
+        <h2 class="h2">Everything your school runs on.<br><span class="dim">In one connected system.</span></h2>
+        <p class="sub">Choose an area to see the modules your office and classrooms will use every day.</p>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Module areas" data-tabs="mods">
+        <button role="tab" aria-selected="true" aria-controls="mods-1" id="mods-t1"><span>01</span>Admissions &amp; students</button>
+        <button role="tab" aria-selected="false" aria-controls="mods-2" id="mods-t2" tabindex="-1"><span>02</span>Fees &amp; people</button>
+        <button role="tab" aria-selected="false" aria-controls="mods-3" id="mods-t3" tabindex="-1"><span>03</span>The school day</button>
+        <button role="tab" aria-selected="false" aria-controls="mods-4" id="mods-t4" tabindex="-1"><span>04</span>Safety &amp; operations</button>
+      </div>
+
+      <div class="panel cards3" id="mods-1" role="tabpanel" aria-labelledby="mods-t1">
+        <article class="card"><span class="tile"><svg class="ico"><use href="#i-usercheck"/></svg></span><h3>Admissions &amp; enquiries</h3><p>Enquiries, follow-ups, applications and document checks kept together.</p></article>
+        <article class="card"><span class="tile"><svg class="ico"><use href="#i-id"/></svg></span><h3>Student 360 records</h3><p>Profiles, guardians, classes, documents, health and achievements on one record.</p></article>
+        <article class="card"><span class="tile"><svg class="ico"><use href="#i-heart"/></svg></span><h3>Parent &amp; student portals</h3><p>Families see their own child’s progress, notices, homework and results.</p></article>
+      </div>
+      <div class="panel cards3" id="mods-2" role="tabpanel" aria-labelledby="mods-t2" hidden>
+        <article class="card"><span class="tile"><svg class="ico"><use href="#i-wallet"/></svg></span><h3>Fees &amp; receipts</h3><p>Fee structures, collection, concessions, receipts and dues follow-up.</p></article>
+        <article class="card"><span class="tile"><svg class="ico"><use href="#i-brief"/></svg></span><h3>Staff, leave &amp; payroll</h3><p>Staff records, leave, attendance, salaries and payslips.</p></article>
+        <article class="card"><span class="tile"><svg class="ico"><use href="#i-chart"/></svg></span><h3>Reports &amp; dashboards</h3><p>Leadership dashboards, plus exports for the office and auditors.</p></article>
+      </div>
+      <div class="panel cards3" id="mods-3" role="tabpanel" aria-labelledby="mods-t3" hidden>
+        <article class="card"><span class="tile"><svg class="ico"><use href="#i-cal"/></svg></span><h3>Attendance &amp; timetables</h3><p>Daily attendance, class timetables and substitutions.</p></article>
+        <article class="card"><span class="tile"><svg class="ico"><use href="#i-award"/></svg></span><h3>Exams &amp; report cards</h3><p>Board-aware grading, mark entry and printable report cards.</p></article>
+        <article class="card"><span class="tile"><svg class="ico"><use href="#i-scan"/></svg></span><h3>AI paper correction</h3><p>AI-suggested marks on handwritten sheets, approved by the teacher.</p></article>
+      </div>
+      <div class="panel cards3" id="mods-4" role="tabpanel" aria-labelledby="mods-t4" hidden>
+        <article class="card"><span class="tile"><svg class="ico"><use href="#i-pin"/></svg></span><h3>Transport &amp; GPS tracking</h3><p>Routes, vehicles and live location for staff and parents.</p></article>
+        <article class="card"><span class="tile"><svg class="ico"><use href="#i-tool"/></svg></span><h3>Operations &amp; assets</h3><p>Job cards, facilities requests and asset records, tracked to closure.</p></article>
+        <article class="card"><span class="tile"><svg class="ico"><use href="#i-building"/></svg></span><h3>Multi-campus group</h3><p>Run several campuses from one platform, with group-level views.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================== ROLES =============================== -->
+  <section class="section" id="roles">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">Who it’s for</p>
+        <h2 class="h2">For the office.<br><span class="dim">And everyone it supports.</span></h2>
+        <p class="sub">Each person signs in to the screens their role needs, with nothing they shouldn’t see.</p>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Roles" data-tabs="roles">
+        <button role="tab" aria-selected="true" aria-controls="roles-1" id="roles-t1"><span>01</span>Management</button>
+        <button role="tab" aria-selected="false" aria-controls="roles-2" id="roles-t2" tabindex="-1"><span>02</span>Accounts</button>
+        <button role="tab" aria-selected="false" aria-controls="roles-3" id="roles-t3" tabindex="-1"><span>03</span>Teachers</button>
+        <button role="tab" aria-selected="false" aria-controls="roles-4" id="roles-t4" tabindex="-1"><span>04</span>Parents &amp; students</button>
+      </div>
+
+      <div class="panel role" id="roles-1" role="tabpanel" aria-labelledby="roles-t1">
+        <h3 class="h3">See what needs attention. Keep the team aligned.</h3>
+        <div class="role__grid">
+          <div><b>Decide with context</b><p>Admissions, fee dues and attendance in one view.</p></div>
+          <div><b>Find any record</b><p>Profiles, guardians and documents linked, not scattered.</p></div>
+          <div><b>Control who sees what</b><p>Access follows each person’s responsibilities.</p></div>
+          <div><b>Fit your school’s way</b><p>Classes, fee structures and permissions set up for you.</p></div>
+        </div>
+      </div>
+      <div class="panel role" id="roles-2" role="tabpanel" aria-labelledby="roles-t2" hidden>
+        <h3 class="h3">Every rupee accounted for, without the ledger hunt.</h3>
+        <div class="role__grid">
+          <div><b>Collect and receipt</b><p>Counter and online payments with instant receipts.</p></div>
+          <div><b>Follow up on dues</b><p>Pending fees by class, term or family.</p></div>
+          <div><b>Run payroll</b><p>Salaries, deductions and payslips each month.</p></div>
+          <div><b>Export for audit</b><p>Clean reports for accountants and auditors.</p></div>
+        </div>
+      </div>
+      <div class="panel role" id="roles-3" role="tabpanel" aria-labelledby="roles-t3" hidden>
+        <h3 class="h3">Less paperwork. More time for teaching.</h3>
+        <div class="role__grid">
+          <div><b>Attendance in minutes</b><p>Mark from a phone, tablet or laptop.</p></div>
+          <div><b>Homework &amp; notes</b><p>Share work and notices with the class.</p></div>
+          <div><b>Marks &amp; report cards</b><p>Enter marks once; reports build themselves.</p></div>
+          <div><b>AI-assisted correction</b><p>Suggested marks you review and approve.</p></div>
+        </div>
+      </div>
+      <div class="panel role" id="roles-4" role="tabpanel" aria-labelledby="roles-t4" hidden>
+        <h3 class="h3">A clear window into school life, for each family.</h3>
+        <div class="role__grid">
+          <div><b>Progress &amp; results</b><p>Published marks, attendance and report cards.</p></div>
+          <div><b>Fees &amp; receipts</b><p>What’s due, what’s paid, and online payment.</p></div>
+          <div><b>Bus location</b><p>Live transport tracking for their own child.</p></div>
+          <div><b>Notices &amp; messages</b><p>School updates in one place, not lost in groups.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== PRICING ============================== -->
+  <section class="section section--raised" id="pricing">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">Pricing <span class="sample-flag" title="Replace these with your real prices in js/main.js">Sample prices</span></p>
+        <h2 class="h2">Start with your school size.<br><span class="dim">Choose how you pay.</span></h2>
+        <p class="sub">Every plan includes the same core modules for one campus. Not sure which fits? We’ll help you choose during the demo.</p>
+      </div>
+
+      <div class="switch" role="radiogroup" aria-label="Payment model">
+        <button type="button" role="radio" aria-checked="true" data-model="yearly">Yearly subscription</button>
+        <button type="button" role="radio" aria-checked="false" data-model="once">One-time licence</button>
+      </div>
+      <p class="switch__note" data-model-note>Lower upfront cost. Pay each year for the software, with support and updates while subscribed.</p>
+
+      <div class="plans" data-plans><!-- Filled from PRICING in js/main.js --></div>
+
+      <div class="included">
+        <div>
+          <h3 class="h3">Core modules in every plan.</h3>
+          <p>You choose a size, not a feature tier. Final modules and permissions are confirmed in your written scope.</p>
+        </div>
+        <ul class="ticks ticks--cols">
+          <li><svg class="ico"><use href="#i-check"/></svg>Admissions &amp; student records</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Fees, dues &amp; receipts</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Attendance &amp; timetables</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Exams &amp; report cards</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Homework &amp; parent portal</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Staff, leave &amp; payroll</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Transport &amp; library</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Reports, imports &amp; exports</li>
+        </ul>
+      </div>
+
+      <div class="quote-band">
+        <div><b>More than 3,000 students, or more than one campus?</b><p>We’ll put together a scope and quote for your group.</p></div>
+        <a href="#demo" class="btn btn--ghost">Request a quote <svg class="ico" width="16" height="16"><use href="#i-arrow"/></svg></a>
+      </div>
+      <p class="fineprint">GST extra. Hosting and third-party services (SMS, WhatsApp, payment gateway) are billed separately. A one-time licence does not include lifetime support or all future upgrades. Final pricing is confirmed in your written quotation.</p>
+    </div>
+  </section>
+
+  <!-- ============================== ADD-ONS ============================== -->
+  <section class="section" id="addons">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">Add-ons</p>
+        <h2 class="h2">Make it<br><span class="metal">your school’s own.</span></h2>
+        <p class="sub">Add a school website or an Android app in your school’s name. Priced separately from the software plan.</p>
+      </div>
+      <div class="addons">
+        <article class="addon">
+          <span class="num">01</span>
+          <span class="tile"><svg class="ico"><use href="#i-globe"/></svg></span>
+          <h3>School website</h3>
+          <p>A responsive website in your school’s branding, with gallery, admissions enquiry and contact pages.</p>
+          <div class="addon__price"><b data-addon-price="website">₹12,000</b><span>one-time</span></div>
+        </article>
+        <article class="addon">
+          <span class="num">02</span>
+          <span class="tile"><svg class="ico"><use href="#i-phone"/></svg></span>
+          <h3>School-branded Android app</h3>
+          <p>The parent and student app with your school’s name, logo and colours, plus help publishing it on Play Store.</p>
+          <div class="addon__price"><b data-addon-price="app">₹18,000</b><span>one-time</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= ESTIMATOR ============================= -->
+  <section class="section section--raised" id="estimate">
+    <div class="wrap estimate">
+      <div class="estimate__form">
+        <p class="kicker"><svg class="ico" width="15" height="15"><use href="#i-sliders"/></svg> Build an estimate</p>
+        <h2 class="h2">Work out<br><span class="dim">your starting point.</span></h2>
+
+        <label class="field"><span>Active students</span>
+          <select data-est="tier"></select>
+        </label>
+        <fieldset class="field">
+          <legend>Payment model</legend>
+          <div class="seg">
+            <label><input type="radio" name="est-model" value="yearly" checked><span>Yearly subscription</span></label>
+            <label><input type="radio" name="est-model" value="once"><span>One-time licence</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="field">
+          <legend>Optional add-ons</legend>
+          <label class="opt"><input type="checkbox" data-est-addon="website"><span>School website</span><em data-addon-label="website"></em></label>
+          <label class="opt"><input type="checkbox" data-est-addon="app"><span>Branded Android app</span><em data-addon-label="app"></em></label>
+        </fieldset>
+      </div>
+
+      <div class="estimate__out" aria-live="polite">
+        <small>Your indicative estimate</small>
+        <div class="estimate__total" data-est-total>₹0</div>
+        <small data-est-sub>First year · before GST</small>
+        <div class="estimate__lines">
+          <div><span data-est-soft-label>Software</span><b data-est-soft>₹0</b></div>
+          <div><span>One-time add-ons</span><b data-est-add>₹0</b></div>
+          <div><span>After the first year</span><b data-est-after>₹0</b></div>
+        </div>
+        <a href="#demo" class="btn btn--gold" data-est-cta>Discuss this estimate <svg class="ico" width="16" height="16"><use href="#i-arrow"/></svg></a>
+        <p class="fineprint">Indicative only. Final scope and price are confirmed in your quotation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== GETTING STARTED =========================== -->
+  <section class="section" id="start">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">Getting started</p>
+        <h2 class="h2">A clear way<br><span class="dim">to get started.</span></h2>
+        <p class="sub">You don’t need to decide everything today. Start with the work you most want to simplify.</p>
+      </div>
+      <ol class="journey">
+        <li><span class="num">01</span><h3>Tell us how your school works</h3><p>Student count, the tools you use now and what slows the office down.</p></li>
+        <li><span class="num">02</span><h3>See the fit with your team</h3><p>A walkthrough of the relevant modules, and which records need to move across.</p></li>
+        <li><span class="num">03</span><h3>Agree the rollout in writing</h3><p>Software, data migration, hosting, backups, support and timelines, all confirmed.</p></li>
+        <li><span class="num">04</span><h3>Set up, train and go live</h3><p>We configure the system and train your staff. Your team checks it before rollout.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================================ FAQ ================================ -->
+  <section class="section section--raised" id="faq">
+    <div class="wrap faq">
+      <div class="head head--left">
+        <p class="kicker">Before you decide</p>
+        <h2 class="h2">Questions<br><span class="dim">schools ask us.</span></h2>
+        <p class="sub">Migration, hosting, backups and support: what to know before rollout.</p>
+        <a href="#demo" class="btn btn--ghost">Ask about your setup</a>
+      </div>
+      <div class="faq__list">
+        <details><summary><span class="num">01</span>Can we move our existing Excel or school records?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>Yes. We import student, parent, staff and fee records from supported Excel and CSV formats. During the demo we agree which records move across and how they are checked.</p></details>
+        <details><summary><span class="num">02</span>Is it web software or a desktop application?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>It is web software, so it works in any modern browser on computers, tablets and phones, with nothing to install on each machine. A mobile app is available for parents and students.</p></details>
+        <details><summary><span class="num">03</span>Is hosting included, and who manages it?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>Hosting is quoted separately so you can choose what suits your school. We can manage it for you, or set it up on your own server or cloud account.</p></details>
+        <details><summary><span class="num">04</span>How do backups and data recovery work?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>Backup frequency, where backups are kept and who can restore them are written into your agreement before rollout, so responsibilities are clear.</p></details>
+        <details><summary><span class="num">05</span>Who can see a student’s records?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>Access is role-based and checked by the server on every request. Parents can only reach their own children’s records, and sensitive changes are logged.</p></details>
+        <details><summary><span class="num">06</span>What is the difference between yearly and one-time plans?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>Yearly keeps the upfront cost low and includes support and updates while you subscribe. One-time is a larger single payment for the agreed version, with support and upgrades available separately.</p></details>
+        <details><summary><span class="num">07</span>Who helps our staff after setup?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>Initial remote training is included. After go-live, support is provided by phone, WhatsApp and email under your plan’s support terms.</p></details>
+        <details><summary><span class="num">08</span>Are online payments, SMS and WhatsApp included?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>The software connects to them, but the providers charge their own fees. We help you set up the accounts and connect them.</p></details>
+        <details><summary><span class="num">09</span>What happens when our student numbers grow?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>You move to the plan for your new size. Nothing is lost and no re-setup is needed.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== DEMO FORM ============================== -->
+  <section class="section demo" id="demo">
+    <div class="hero__glow hero__glow--low" aria-hidden="true"></div>
+    <div class="wrap demo__grid">
+      <div>
+        <p class="kicker">See the fit before you decide</p>
+        <h2 class="h2">Your school.<br>Your questions.<br><span class="metal">Your demo.</span></h2>
+        <p class="sub">Bring the workflow you want to improve. We’ll show how Edunex handles it, then explain the plan and setup your school would need.</p>
+        <ol class="demo__steps">
+          <li><span class="num">01</span><div><b>Start with your school</b><p>Student count, current tools and daily challenges.</p></div></li>
+          <li><span class="num">02</span><div><b>See the relevant workflows</b><p>Admissions, fees or whichever modules you need.</p></div></li>
+          <li><span class="num">03</span><div><b>Know your next step</b><p>Scope, pricing and support in a written quote.</p></div></li>
+        </ol>
+      </div>
+
+      <form class="form" id="enquiry" novalidate>
+        <h3 class="h3">Book your school’s demo.</h3>
+        <p class="form__hint">Only your mobile number is required.</p>
+        <label class="field"><span>Phone / WhatsApp <em>required</em></span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required></label>
+        <div class="form__row">
+          <label class="field"><span>Your name</span><input name="name" autocomplete="name"></label>
+          <label class="field"><span>School name</span><input name="school" autocomplete="organization"></label>
+        </div>
+        <label class="field"><span>Active students</span>
+          <select name="students" data-form-tiers><option value="">Choose one</option></select>
+        </label>
+        <label class="field"><span>City, preferences or requirements</span><textarea name="message" rows="3"></textarea></label>
+        <p class="form__error" role="alert" hidden></p>
+        <button type="submit" class="btn btn--gold btn--block">Request my demo <svg class="ico" width="17" height="17"><use href="#i-arrow"/></svg></button>
+        <p class="form__hint">Please don’t share student records here.</p>
+        <div class="form__done" hidden role="status">
+          <svg class="ico" width="22" height="22"><use href="#i-check"/></svg>
+          <div><b>Thank you.</b> We’ll call you to understand your needs and arrange a walkthrough.</div>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <a href="#top" class="brand">
+      <img src="assets/logo-gold.svg" width="34" height="34" alt="">
+      <span class="brand__text"><span class="brand__name">EDUNEX</span><span class="brand__tag">Smart School 360</span></span>
+    </a>
+    <nav class="foot__links" aria-label="Footer">
+      <a href="#tour">Product tour</a>
+      <a href="#modules">Modules</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#demo">Book a demo</a>
+    </nav>
+    <p class="foot__copy">© <span id="year">2026</span> Edunex Smart School 360 · A product by Aavoraa</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Edunex">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E6C38A"/>
+      <stop offset=".5" stop-color="#C9954A"/>
+      <stop offset="1" stop-color="#9C6A2C"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="62" height="62" rx="16" fill="#121010" stroke="url(#g)" stroke-width="1.5"/>
+  <path d="M12 27.5c6.6-3.2 13-3 19 .9v21.1c-6-3.9-12.4-4.1-19-.9z" fill="url(#g)"/>
+  <path d="M52 27.5c-6.6-3.2-13-3-19 .9v21.1c6-3.9 12.4-4.1 19-.9z" fill="url(#g)" fill-opacity=".7"/>
+  <path d="M32 8.5l2.1 5.4 5.4 2.1-5.4 2.1L32 23.5l-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#E6C38A"/>
+</svg>
