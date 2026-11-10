@@ -2,23 +2,92 @@
   'use strict';
 
   /* ======================================================================
-     PRICING — the single place to edit prices (₹, before GST).
-     These are SAMPLE values: replace them with your real prices, then
-     remove the "Sample prices" flag in index.html (#pricing .sample-flag).
+     PRICING — the single place to edit plans, prices and features.
+     Prices are ₹ per active student per year, before GST.
+     These prices are SAMPLE values: replace them with your real prices,
+     then remove the "Sample prices" flag in index.html (#pricing .sample-flag).
+     Each feature is [name, short description shown as a tooltip].
      ====================================================================== */
   var PRICING = {
-    tiers: [
-      { id: 't1', size: 'Up to 300',   yearly: 12000, once: 40000 },
-      { id: 't2', size: '301 – 750',   yearly: 20000, once: 65000, best: true },
-      { id: 't3', size: '751 – 1,500', yearly: 30000, once: 95000 },
-      { id: 't4', size: '1,501 – 3,000', yearly: 45000, once: 140000 }
+    plans: [
+      {
+        id: 'starter', name: 'Starter', price: 300,
+        cta: 'Book a demo',
+        tagline: 'Small school, getting started',
+        features: [
+          ['Student 360 records', 'One profile per student: details, guardians, class, documents and history.'],
+          ['Enquiries & admissions', 'Log enquiries, follow up and turn applications into enrolled students.'],
+          ['Daily attendance', 'Mark class attendance from any device and see the day at a glance.'],
+          ['Classes, subjects & timetable', 'Set up classes, sections, subjects and the weekly timetable.'],
+          ['Fee structures & collection', 'Class-wise fee structures, counter collection and student accounts.'],
+          ['Receipts & payments', 'Printable receipts and a full payment history for every family.'],
+          ['Circulars, events & notifications', 'Send school notices and event updates to staff and parents.'],
+          ['Parent & student portal', 'Families see their own child’s attendance, fees, notices and results.'],
+          ['Data import & export', 'Bring records in from Excel/CSV and export them any time.'],
+          ['Standard reports', 'Ready-made reports for admissions, attendance and fees.']
+        ]
+      },
+      {
+        id: 'standard', name: 'Standard', price: 500,
+        cta: 'Book a demo',
+        tagline: 'Growing school, running the day online',
+        includes: 'Everything in Starter, plus:',
+        features: [
+          ['Homework & lesson plans', 'Teachers plan lessons and share homework with each class.'],
+          ['Assessments & report cards', 'Mark entry, grading and printable report cards.'],
+          ['Board syllabus & grading', 'CBSE, ICSE, Cambridge IGCSE, IB, NIOS and Matric syllabus, outcomes and grading.'],
+          ['Staff directory, leave & attendance', 'Teaching and non-teaching staff records, leave requests and attendance.'],
+          ['Payroll & payslips', 'Monthly salaries, allowances, deductions and payslips.'],
+          ['Concessions & scholarships', 'Apply fee concessions and track scholarships per student.'],
+          ['PTM & parent communication', 'Schedule parent–teacher meetings and keep a parent contact log.'],
+          ['Certificates with QR verification', 'Issue certificates anyone can verify by scanning a QR code.'],
+          ['Android app', 'A native Android app for staff, parents and students.'],
+          ['Staff self-service', 'Staff see their own attendance, leave, payslips and tasks.']
+        ]
+      },
+      {
+        id: 'professional', name: 'Professional', price: 800, popular: true,
+        cta: 'Book a demo',
+        tagline: 'Busy campus, needs AI and safety',
+        includes: 'Everything in Standard, plus:',
+        features: [
+          ['AI paper correction', 'AI reads handwritten answer sheets and suggests marks; teachers approve every mark.', true],
+          ['AI Teacher Co-Pilot', 'An AI assistant that helps teachers plan, explain and prepare.', true],
+          ['GPS bus & student tracking', 'Live maps, routes and location history; parents see only their own child.'],
+          ['Smart gate & pickup authorisation', 'Gate entry/exit logs and approved adults for student pickup.'],
+          ['Visitor management', 'Register, badge and track every visitor on campus.'],
+          ['Admissions CRM & analytics', 'Leads, counselling pipeline, campus visits, referrals and conversion analytics.'],
+          ['Behaviour, wellbeing & early warning', 'Spot students who need support before small issues grow.'],
+          ['Health, infirmary & counselling', 'Medical visits, health records and counselling notes.'],
+          ['Expenses, budgets & reconciliation', 'Track spending against budgets and reconcile accounts.'],
+          ['Facilities, assets & job cards', 'Maintenance requests, assets and inventory, tracked to closure.'],
+          ['Command Center dashboards', 'Live leadership dashboards across admissions, academics, fees and safety.']
+        ]
+      },
+      {
+        id: 'enterprise', name: 'Enterprise', price: 1100,
+        cta: 'Talk to us',
+        tagline: 'School groups and multi-campus',
+        includes: 'Everything in Professional, plus:',
+        features: [
+          ['Multi-campus management', 'Run every campus from one platform with shared settings.'],
+          ['Group dashboard & campus comparison', 'Compare campuses side by side on the numbers that matter.'],
+          ['Transfers between campuses', 'Move students and staff between campuses with their full records.'],
+          ['Group policies', 'Set policies once and apply them across the group.'],
+          ['School Knowledge AI', 'Ask questions of your school’s own policies and documents.', true],
+          ['Innovation lab & talent discovery', 'Student ideas, projects, mentors, competitions and achievements.'],
+          ['Compliance calendar & audit trail', 'Statutory deadlines plus a record of who changed what, and when.'],
+          ['Custom roles & approvals', 'Your own roles, permissions and multi-step approval flows.'],
+          ['REST API access', 'Connect your own tools to the same API the web and mobile apps use.'],
+          ['Priority support', 'A named contact and faster response times.']
+        ]
+      }
     ],
-    addons: { website: 12000, app: 18000 },
-    // Yearly cost after year one for a one-time licence (support & updates), or 0 if none.
-    onceRenewal: 0
+    addons: { website: 12000, app: 18000 }
   };
 
-  var inr = function (n) { return '₹' + Number(n).toLocaleString('en-IN'); };
+  var inr = function (n) { return '₹' + Math.round(Number(n)).toLocaleString('en-IN'); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
@@ -91,89 +160,75 @@
 
   /* ---- Pricing cards --------------------------------------------------- */
   var plansEl = $('[data-plans]');
-  var note = $('[data-model-note]');
-  var NOTES = {
-    yearly: 'Lower upfront cost. Pay each year for the software, with support and updates while subscribed.',
-    once: 'One payment for the agreed version of the software. Ongoing support and future upgrades are quoted separately.'
-  };
-  var check = '<svg class="ico"><use href="#i-check"/></svg>';
+  var check = '<svg class="ico plan__tick" aria-hidden="true"><use href="#i-check"/></svg>';
+  var spark = '<svg class="ico plan__ai" aria-label="AI feature" role="img"><use href="#i-sparkle"/></svg>';
 
-  function renderPlans(model) {
-    if (!plansEl) return;
-    plansEl.innerHTML = PRICING.tiers.map(function (t) {
-      var price = model === 'yearly' ? t.yearly : t.once;
-      var renew = model === 'yearly'
-        ? 'Renews at ' + inr(t.yearly) + '/year for the same size.'
-        : (PRICING.onceRenewal ? 'Optional support from ' + inr(PRICING.onceRenewal) + '/year.' : 'Support after setup is quoted separately.');
-      return '<article class="plan' + (t.best ? ' plan--best' : '') + '">' +
-        (t.best ? '<span class="plan__badge">Most chosen</span>' : '') +
-        '<div class="plan__size">' + t.size + '</div>' +
-        '<div class="plan__unit">active students · one campus</div>' +
-        '<div class="plan__price">' + inr(price) + (model === 'yearly' ? ' <small>/ year</small>' : ' <small>one-time</small>') + '</div>' +
-        '<div class="plan__gst">GST extra</div>' +
-        '<ul>' +
-          '<li>' + check + 'All core school modules</li>' +
-          '<li>' + check + 'Setup and remote staff training</li>' +
-          '<li>' + check + (model === 'yearly' ? 'Support and updates while subscribed' : 'Licence for the agreed version') + '</li>' +
-        '</ul>' +
-        '<p class="plan__renew">' + renew + '</p>' +
-        '<a href="#demo" class="btn ' + (t.best ? 'btn--gold' : 'btn--ghost') + '" data-plan="' + t.id + '">Discuss this plan</a>' +
+  if (plansEl) {
+    plansEl.innerHTML = PRICING.plans.map(function (p) {
+      var feats = p.features.map(function (f, i) {
+        var tipId = 'tip-' + p.id + '-' + i;
+        return '<li tabindex="0" aria-describedby="' + tipId + '">' + check +
+          '<span class="plan__feat">' + esc(f[0]) + (f[2] ? spark : '') + '</span>' +
+          '<span class="tip" role="tooltip" id="' + tipId + '">' + esc(f[1]) + '</span></li>';
+      }).join('');
+      return '<article class="plan' + (p.popular ? ' plan--best' : '') + '" aria-labelledby="plan-' + p.id + '">' +
+        (p.popular ? '<span class="plan__badge">Most popular</span>' : '') +
+        '<h3 class="plan__name" id="plan-' + p.id + '">' + p.name + '</h3>' +
+        '<div class="plan__price"><span class="plan__cur">₹</span>' + Number(p.price).toLocaleString('en-IN') + '</div>' +
+        '<div class="plan__unit">/student/year</div>' +
+        '<a href="#demo" class="btn ' + (p.popular ? 'btn--gold' : 'btn--ghost') + ' plan__cta" data-plan="' + p.id + '">' + p.cta + '</a>' +
+        '<p class="plan__tagline">' + esc(p.tagline) + '</p>' +
+        (p.includes ? '<p class="plan__includes">' + esc(p.includes) + '</p>' : '') +
+        '<ul class="plan__list">' + feats + '</ul>' +
       '</article>';
     }).join('');
-    if (note) note.textContent = NOTES[model];
   }
 
-  var switchBtns = $$('.switch [data-model]');
-  switchBtns.forEach(function (b) {
-    b.addEventListener('click', function () {
-      switchBtns.forEach(function (x) { x.setAttribute('aria-checked', String(x === b)); });
-      renderPlans(b.getAttribute('data-model'));
-    });
-  });
-  renderPlans('yearly');
-
-  // Lowest yearly price in the hero, add-on prices
+  // Lowest price in the hero, add-on prices
   var from = $('[data-from-price]');
-  if (from) from.textContent = inr(Math.min.apply(null, PRICING.tiers.map(function (t) { return t.yearly; })));
+  if (from) from.textContent = inr(Math.min.apply(null, PRICING.plans.map(function (p) { return p.price; })));
   $$('[data-addon-price]').forEach(function (el) { el.textContent = inr(PRICING.addons[el.getAttribute('data-addon-price')]); });
   $$('[data-addon-label]').forEach(function (el) { el.textContent = '+' + inr(PRICING.addons[el.getAttribute('data-addon-label')]); });
 
   /* ---- Estimator ------------------------------------------------------- */
-  var tierSel = $('[data-est="tier"]');
-  var formTiers = $('[data-form-tiers]');
-  PRICING.tiers.forEach(function (t) {
-    if (tierSel) tierSel.add(new Option(t.size + ' students', t.id, false, !!t.best));
-    if (formTiers) formTiers.add(new Option(t.size, t.size));
+  var planSel = $('[data-est="plan"]');
+  var studentsIn = $('[data-est="students"]');
+  var formPlans = $('[data-form-plans]');
+  PRICING.plans.forEach(function (p) {
+    if (planSel) planSel.add(new Option(p.name + ' · ' + inr(p.price) + '/student', p.id, false, !!p.popular));
+    if (formPlans) formPlans.add(new Option(p.name, p.name));
   });
-  if (formTiers) formTiers.add(new Option('More than 3,000 / several campuses', 'More than 3,000'));
 
   function estimate() {
-    if (!tierSel) return;
-    var tier = PRICING.tiers.filter(function (t) { return t.id === tierSel.value; })[0] || PRICING.tiers[0];
-    var model = ($('input[name="est-model"]:checked') || {}).value || 'yearly';
+    if (!planSel) return;
+    var plan = PRICING.plans.filter(function (p) { return p.id === planSel.value; })[0] || PRICING.plans[0];
+    var n = Math.max(0, Math.floor(Number(studentsIn.value) || 0));
+    var soft = plan.price * n;
     var addons = $$('[data-est-addon]').reduce(function (sum, c) { return sum + (c.checked ? PRICING.addons[c.getAttribute('data-est-addon')] : 0); }, 0);
-    var soft = model === 'yearly' ? tier.yearly : tier.once;
-    var after = model === 'yearly' ? tier.yearly : PRICING.onceRenewal;
 
     $('[data-est-total]').textContent = inr(soft + addons);
-    $('[data-est-sub]').textContent = model === 'yearly' ? 'First year · before GST' : 'One-time · before GST';
-    $('[data-est-soft-label]').textContent = model === 'yearly' ? 'Software subscription' : 'One-time licence';
-    $('[data-est-soft]').textContent = inr(soft) + (model === 'yearly' ? '/year' : '');
+    $('[data-est-sub]').textContent = 'First year · before GST';
+    $('[data-est-soft-label]').textContent = plan.name + ' · ' + n.toLocaleString('en-IN') + ' students';
+    $('[data-est-soft]').textContent = inr(soft) + '/year';
+    $('[data-est-rate]').textContent = inr(plan.price) + ' per student';
     $('[data-est-add]').textContent = inr(addons);
-    $('[data-est-after]').textContent = after ? inr(after) + '/year' : 'Quoted separately';
+    $('[data-est-after]').textContent = inr(soft) + '/year';
   }
-  $$('#estimate select, #estimate input').forEach(function (el) { el.addEventListener('change', estimate); });
+  $$('#estimate select, #estimate input').forEach(function (el) {
+    el.addEventListener('change', estimate);
+    el.addEventListener('input', estimate);
+  });
   estimate();
 
-  // Carry the chosen size into the demo form
-  function presetForm(tierId) {
-    var t = PRICING.tiers.filter(function (x) { return x.id === tierId; })[0];
-    if (t && formTiers) formTiers.value = t.size;
+  // Carry the chosen plan into the demo form
+  function presetForm(planId) {
+    var p = PRICING.plans.filter(function (x) { return x.id === planId; })[0];
+    if (p && formPlans) formPlans.value = p.name;
   }
   document.addEventListener('click', function (e) {
     var plan = e.target.closest('[data-plan]');
     if (plan) presetForm(plan.getAttribute('data-plan'));
-    if (e.target.closest('[data-est-cta]') && tierSel) presetForm(tierSel.value);
+    if (e.target.closest('[data-est-cta]') && planSel) presetForm(planSel.value);
   });
 
   /* ---- Reveal on scroll ------------------------------------------------ */

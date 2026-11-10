@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/styles.css?v=4">
 </head>
 <body>
 
@@ -99,7 +99,7 @@
           <a href="#demo" class="btn btn--gold">Book a demo <svg class="ico" width="17" height="17"><use href="#i-arrow"/></svg></a>
           <a href="#pricing" class="btn btn--ghost">See pricing</a>
         </div>
-        <p class="hero__price">Plans from <b data-from-price>₹12,000</b>/year · priced by student count · GST extra</p>
+        <p class="hero__price">Plans from <b data-from-price>₹300</b> per student / year · GST extra</p>
         <ul class="chips" aria-label="What you get">
           <li>Free consultation</li>
           <li>Written quote</li>
@@ -364,40 +364,17 @@
     <div class="wrap">
       <div class="head">
         <p class="kicker">Pricing <span class="sample-flag" title="Replace these with your real prices in js/main.js">Sample prices</span></p>
-        <h2 class="h2">Start with your school size.<br><span class="dim">Choose how you pay.</span></h2>
-        <p class="sub">Every plan includes the same core modules for one campus. Not sure which fits? We’ll help you choose during the demo.</p>
+        <h2 class="h2">Pick the plan that fits.<br><span class="dim">Pay only per student.</span></h2>
+        <p class="sub">Pay per active student, billed yearly. Every plan includes setup, staff training and role-based access for staff, parents and students.</p>
       </div>
-
-      <div class="switch" role="radiogroup" aria-label="Payment model">
-        <button type="button" role="radio" aria-checked="true" data-model="yearly">Yearly subscription</button>
-        <button type="button" role="radio" aria-checked="false" data-model="once">One-time licence</button>
-      </div>
-      <p class="switch__note" data-model-note>Lower upfront cost. Pay each year for the software, with support and updates while subscribed.</p>
 
       <div class="plans" data-plans><!-- Filled from PRICING in js/main.js --></div>
 
-      <div class="included">
-        <div>
-          <h3 class="h3">Core modules in every plan.</h3>
-          <p>You choose a size, not a feature tier. Final modules and permissions are confirmed in your written scope.</p>
-        </div>
-        <ul class="ticks ticks--cols">
-          <li><svg class="ico"><use href="#i-check"/></svg>Admissions &amp; student records</li>
-          <li><svg class="ico"><use href="#i-check"/></svg>Fees, dues &amp; receipts</li>
-          <li><svg class="ico"><use href="#i-check"/></svg>Attendance &amp; timetables</li>
-          <li><svg class="ico"><use href="#i-check"/></svg>Exams &amp; report cards</li>
-          <li><svg class="ico"><use href="#i-check"/></svg>Homework &amp; parent portal</li>
-          <li><svg class="ico"><use href="#i-check"/></svg>Staff, leave &amp; payroll</li>
-          <li><svg class="ico"><use href="#i-check"/></svg>Transport &amp; library</li>
-          <li><svg class="ico"><use href="#i-check"/></svg>Reports, imports &amp; exports</li>
-        </ul>
-      </div>
-
       <div class="quote-band">
-        <div><b>More than 3,000 students, or more than one campus?</b><p>We’ll put together a scope and quote for your group.</p></div>
-        <a href="#demo" class="btn btn--ghost">Request a quote <svg class="ico" width="16" height="16"><use href="#i-arrow"/></svg></a>
+        <div><b>Not sure which plan fits?</b><p>We’ll walk through your school’s workflows in the demo and recommend one, or build a custom scope.</p></div>
+        <a href="#demo" class="btn btn--ghost">Talk to us <svg class="ico" width="16" height="16"><use href="#i-arrow"/></svg></a>
       </div>
-      <p class="fineprint">GST extra. Hosting and third-party services (SMS, WhatsApp, payment gateway) are billed separately. A one-time licence does not include lifetime support or all future upgrades. Final pricing is confirmed in your written quotation.</p>
+      <p class="fineprint">Prices per active student per year, GST extra. Hosting and third-party services (SMS, WhatsApp, payment gateway, GPS devices) are billed separately. Final pricing is confirmed in your written quotation.</p>
     </div>
   </section>
 
@@ -435,16 +412,12 @@
         <p class="kicker"><svg class="ico" width="15" height="15"><use href="#i-sliders"/></svg> Build an estimate</p>
         <h2 class="h2">Work out<br><span class="dim">your starting point.</span></h2>
 
-        <label class="field"><span>Active students</span>
-          <select data-est="tier"></select>
+        <label class="field"><span>Plan</span>
+          <select data-est="plan"></select>
         </label>
-        <fieldset class="field">
-          <legend>Payment model</legend>
-          <div class="seg">
-            <label><input type="radio" name="est-model" value="yearly" checked><span>Yearly subscription</span></label>
-            <label><input type="radio" name="est-model" value="once"><span>One-time licence</span></label>
-          </div>
-        </fieldset>
+        <label class="field"><span>Active students</span>
+          <input type="number" data-est="students" min="1" max="100000" step="10" value="500" inputmode="numeric">
+        </label>
         <fieldset class="field">
           <legend>Optional add-ons</legend>
           <label class="opt"><input type="checkbox" data-est-addon="website"><span>School website</span><em data-addon-label="website"></em></label>
@@ -458,6 +431,7 @@
         <small data-est-sub>First year · before GST</small>
         <div class="estimate__lines">
           <div><span data-est-soft-label>Software</span><b data-est-soft>₹0</b></div>
+          <div><span>Rate</span><b data-est-rate>₹0</b></div>
           <div><span>One-time add-ons</span><b data-est-add>₹0</b></div>
           <div><span>After the first year</span><b data-est-after>₹0</b></div>
         </div>
@@ -499,10 +473,10 @@
         <details><summary><span class="num">03</span>Is hosting included, and who manages it?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>Hosting is quoted separately so you can choose what suits your school. We can manage it for you, or set it up on your own server or cloud account.</p></details>
         <details><summary><span class="num">04</span>How do backups and data recovery work?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>Backup frequency, where backups are kept and who can restore them are written into your agreement before rollout, so responsibilities are clear.</p></details>
         <details><summary><span class="num">05</span>Who can see a student’s records?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>Access is role-based and checked by the server on every request. Parents can only reach their own children’s records, and sensitive changes are logged.</p></details>
-        <details><summary><span class="num">06</span>What is the difference between yearly and one-time plans?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>Yearly keeps the upfront cost low and includes support and updates while you subscribe. One-time is a larger single payment for the agreed version, with support and upgrades available separately.</p></details>
+        <details><summary><span class="num">06</span>Can we start on one plan and move up later?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>Yes. Your data stays exactly where it is; moving up simply switches on the extra modules, and we adjust the price for the rest of your billing year.</p></details>
         <details><summary><span class="num">07</span>Who helps our staff after setup?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>Initial remote training is included. After go-live, support is provided by phone, WhatsApp and email under your plan’s support terms.</p></details>
         <details><summary><span class="num">08</span>Are online payments, SMS and WhatsApp included?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>The software connects to them, but the providers charge their own fees. We help you set up the accounts and connect them.</p></details>
-        <details><summary><span class="num">09</span>What happens when our student numbers grow?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>You move to the plan for your new size. Nothing is lost and no re-setup is needed.</p></details>
+        <details><summary><span class="num">09</span>What happens when our student numbers grow?<svg class="ico" width="18" height="18"><use href="#i-plus"/></svg></summary><p>You pay per active student, so the price follows your size at renewal. Nothing is lost and no re-setup is needed.</p></details>
       </div>
     </div>
   </section>
@@ -530,9 +504,21 @@
           <label class="field"><span>Your name</span><input name="name" autocomplete="name"></label>
           <label class="field"><span>School name</span><input name="school" autocomplete="organization"></label>
         </div>
-        <label class="field"><span>Active students</span>
-          <select name="students" data-form-tiers><option value="">Choose one</option></select>
-        </label>
+        <div class="form__row">
+          <label class="field"><span>Active students</span>
+            <select name="students">
+              <option value="">Choose one</option>
+              <option>Up to 300</option>
+              <option>301 – 750</option>
+              <option>751 – 1,500</option>
+              <option>1,501 – 3,000</option>
+              <option>More than 3,000</option>
+            </select>
+          </label>
+          <label class="field"><span>Plan you’re interested in</span>
+            <select name="plan" data-form-plans><option value="">Not sure yet</option></select>
+          </label>
+        </div>
         <label class="field"><span>City, preferences or requirements</span><textarea name="message" rows="3"></textarea></label>
         <p class="form__error" role="alert" hidden></p>
         <button type="submit" class="btn btn--gold btn--block">Request my demo <svg class="ico" width="17" height="17"><use href="#i-arrow"/></svg></button>
@@ -563,6 +549,6 @@
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<script src="js/main.js?v=3"></script>
 </body>
 </html>
