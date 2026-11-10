@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Edunex Smart School 360 — School management software</title>
 <meta name="description" content="Admissions, fees, attendance, academics, transport and parent communication in one school management platform, with AI-assisted paper correction.">
-<meta name="theme-color" content="#0a0909">
-<link rel="icon" type="image/svg+xml" href="assets/logo-gold.svg">
+<meta name="theme-color" content="#233d31">
+<link rel="icon" type="image/svg+xml" href="assets/logo-chalk.svg?v=2">
 <link rel="apple-touch-icon" href="assets/favicon.png">
-<script>
-  // Apply the saved theme before the page paints.
-  try { var t = localStorage.getItem('edunex-theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
-  document.documentElement.classList.add('js');
-</script>
+<script>document.documentElement.classList.add('js');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=4">
+<link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&family=Caveat:wght@500;700&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=23">
 </head>
 <body>
 
@@ -29,8 +25,6 @@
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
     <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
-    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
-    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
     <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/></symbol>
     <symbol id="i-id" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="8.5" cy="11" r="2.5"/><path d="M4.5 17.5c.8-1.6 2.3-2.5 4-2.5s2.9.9 3.7 2.5M15 9h5M15 13h5"/></symbol>
@@ -54,6 +48,30 @@
     <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></symbol>
     <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
     <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol>
+
+    <!-- Chalk effect: roughens edges and adds chalk grain -->
+    <filter id="chalk" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="1" seed="4" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.4 0 0 0 1.85" result="grain"/>
+      <feComposite in="rough" in2="grain" operator="in"/>
+    </filter>
+    <!-- Chalk doodles -->
+    <symbol id="d-school" viewBox="0 0 140 110"><path d="M2 104h136M14 104V52h112v52M8 55 70 16l62 39M58 104V80h24v24M70 80v24" pathLength="100"/><rect x="24" y="62" width="20" height="16" pathLength="100"/><rect x="96" y="62" width="20" height="16" pathLength="100"/><path d="M34 62v16M24 70h20M106 62v16M96 70h20" pathLength="100"/><circle cx="70" cy="44" r="8" pathLength="100"/><path d="M70 39v5l3 2M70 16V3l15 4.5L70 12" pathLength="100"/></symbol>
+    <symbol id="d-bus" viewBox="0 0 130 74"><path d="M8 58V20a8 8 0 0 1 8-8h84c8 0 14 5 18 13l5 11v22z" pathLength="100"/><path d="M18 22h18v14H18zM42 22h18v14H42zM66 22h18v14H66zM92 22h14l7 14H92zM8 44h115" pathLength="100"/><circle cx="32" cy="60" r="9" pathLength="100"/><circle cx="98" cy="60" r="9" pathLength="100"/></symbol>
+    <symbol id="d-books" viewBox="0 0 100 80"><rect x="8" y="58" width="84" height="16" rx="3" pathLength="100"/><path d="M18 58v16" pathLength="100"/><rect x="16" y="40" width="68" height="18" rx="3" pathLength="100"/><path d="M74 40v18" pathLength="100"/><path d="M14 22 82 16l2 18-68 6z" pathLength="100"/><path d="M24 21l2 18" pathLength="100"/></symbol>
+    <symbol id="d-pencil" viewBox="0 0 124 40"><path d="M14 12h76l22 8-22 8H14zM90 12v16M24 12v16M14 12c-6 0-6 16 0 16M106 18l6 2-6 2" pathLength="100"/></symbol>
+    <symbol id="d-apple" viewBox="0 0 60 64"><path d="M30 18c-6-4-22-6-24 12s10 30 18 30c3 0 4-2 6-2s3 2 6 2c8 0 20-12 18-30S36 14 30 18zM30 18c0-6 2-10 6-14M34 10c6-6 14-4 16-2-4 6-12 6-16 2z" pathLength="100"/></symbol>
+    <symbol id="d-cap" viewBox="0 0 110 72"><path d="M55 8 4 28l51 20 51-20zM24 36v18c0 6 14 12 31 12s31-6 31-12V36M96 32v22M92 54h8l-2 9h-4z" pathLength="100"/></symbol>
+    <symbol id="d-star" viewBox="0 0 50 50"><path d="m25 4 6 13 14 2-10 10 2 14-12-7-12 7 2-14L5 19l14-2z" pathLength="100"/></symbol>
+    <symbol id="d-globe" viewBox="0 0 70 92"><circle cx="35" cy="34" r="24" pathLength="100"/><path d="M11 34h48M35 10c-10 10-10 38 0 48M35 10c10 10 10 38 0 48M16 20h38M16 48h38M35 64v14M22 84h26" pathLength="100"/></symbol>
+    <symbol id="d-ruler" viewBox="0 0 130 34"><rect x="4" y="6" width="122" height="22" rx="3" pathLength="100"/><path d="M16 6v8M28 6v12M40 6v8M52 6v12M64 6v8M76 6v12M88 6v8M100 6v12M112 6v8" pathLength="100"/></symbol>
+    <symbol id="d-plane" viewBox="0 0 140 70"><path d="M134 6 74 30l18 6zM134 6 92 36l6 22 10-16zM98 58l-6-22" pathLength="100"/><path d="M70 34c-20 4-26 22-14 26s14-14-4-18S18 50 4 62" stroke-dasharray="3 7"/></symbol>
+    <symbol id="d-arrow" viewBox="0 0 90 60"><path d="M6 52C16 22 46 12 76 22M64 10l13 12-15 7" pathLength="100"/></symbol>
+    <symbol id="d-bulb" viewBox="0 0 60 80"><path d="M30 6a20 20 0 0 0-12 36c4 4 4 8 4 12h16c0-4 0-8 4-12A20 20 0 0 0 30 6zM22 62h16M24 70h12M30 0v-6M6 10 1 5M54 10l5-5" pathLength="100"/></symbol>
+    <symbol id="d-abc" viewBox="0 0 110 54"><text x="4" y="44" font-family="Caveat, cursive" font-size="50" font-weight="700" fill="currentColor" stroke="none">ABC</text></symbol>
+    <symbol id="d-math" viewBox="0 0 210 54"><text x="4" y="42" font-family="Caveat, cursive" font-size="42" font-weight="700" fill="currentColor" stroke="none">a² + b² = c²</text></symbol>
+    <symbol id="d-sum" viewBox="0 0 150 54"><text x="4" y="42" font-family="Caveat, cursive" font-size="42" font-weight="700" fill="currentColor" stroke="none">2 + 3 = 5</text></symbol>
   </defs>
 </svg>
 
@@ -63,21 +81,18 @@
 <header class="nav">
   <div class="nav__bar">
     <a href="#top" class="brand" aria-label="Edunex Smart School 360, back to top">
-      <img src="assets/logo-gold.svg" width="40" height="40" alt="">
+      <img src="assets/logo-chalk.svg?v=2" width="40" height="40" alt="">
       <span class="brand__text"><span class="brand__name">EDUNEX</span><span class="brand__tag">Smart School 360</span></span>
     </a>
     <nav class="nav__links" id="nav-links" aria-label="Sections">
       <a href="#tour">Product tour</a>
       <a href="#modules">Modules</a>
-      <a href="#pricing">Pricing</a>
+      <a href="#pricing" class="nav__price">Pricing</a>
       <a href="#faq">FAQ</a>
       <a href="#demo" class="nav__links-cta">Book a demo</a>
     </nav>
     <div class="nav__actions">
-      <button type="button" class="iconbtn theme-toggle" aria-label="Switch to light theme">
-        <svg class="ico" width="18" height="18"><use href="#i-sun"/></svg>
-      </button>
-      <a href="#demo" class="btn btn--gold nav__cta">Book a demo</a>
+      <a href="#demo" class="btn btn--accent nav__cta">Book a demo</a>
       <button type="button" class="iconbtn nav__menu" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
         <svg class="ico" width="20" height="20"><use href="#i-menu"/></svg>
       </button>
@@ -90,16 +105,17 @@
   <!-- ============================== HERO ============================== -->
   <section class="hero" id="top">
     <div class="hero__glow" aria-hidden="true"></div>
+    <div class="doodles" aria-hidden="true"><svg class="doodle dd-star1 doodle--y m-twinkle" aria-hidden="true" focusable="false"><use href="#d-star"/></svg><svg class="doodle dd-star2 m-twinkle" aria-hidden="true" focusable="false"><use href="#d-star"/></svg><svg class="doodle dd-apple doodle--p m-bob" aria-hidden="true" focusable="false"><use href="#d-apple"/></svg><svg class="doodle dd-pencil doodle--y m-wiggle" aria-hidden="true" focusable="false"><use href="#d-pencil"/></svg></div>
     <div class="wrap hero__grid">
       <div class="hero__copy">
         <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>School ERP · Built for Indian schools</p>
-        <h1 class="display">One school.<br><span class="metal">Every record connected.</span></h1>
+        <h1 class="display">One school.<br><span class="hl">Every record connected.</span></h1>
         <p class="lead">Admissions, fees, attendance, exams, transport and parent updates in one place, so your office stops chasing spreadsheets and starts seeing what needs attention.</p>
         <div class="hero__cta">
-          <a href="#demo" class="btn btn--gold">Book a demo <svg class="ico" width="17" height="17"><use href="#i-arrow"/></svg></a>
+          <a href="#demo" class="btn btn--accent">Book a demo <svg class="ico" width="17" height="17"><use href="#i-arrow"/></svg></a>
           <a href="#pricing" class="btn btn--ghost">See pricing</a>
         </div>
-        <p class="hero__price">Plans from <b data-from-price>₹300</b> per student / year · GST extra</p>
+        <a href="#pricing" class="hero__price">Plans from <b data-from-price>₹300</b> per student / year · GST extra <span class="hero__price-go">See plans <svg class="ico" width="14" height="14"><use href="#i-arrow"/></svg></span></a>
         <ul class="chips" aria-label="What you get">
           <li>Free consultation</li>
           <li>Written quote</li>
@@ -108,48 +124,97 @@
         </ul>
       </div>
 
-      <!-- Product mock-up (illustrative) -->
-      <div class="hero__visual" aria-label="Illustration of the admissions workflow">
-        <div class="frame">
-          <div class="frame__bar"><span></span><span></span><span></span><em>Edunex · Admissions</em></div>
-          <div class="frame__body">
-            <aside class="mock-side" aria-hidden="true">
-              <i class="is-on"></i><i></i><i></i><i></i><i></i><i></i>
-            </aside>
-            <div class="mock-main">
-              <div class="mock-head">
-                <div><b>Admission confirmed</b><small>Class 6 · Section B</small></div>
-                <span class="tag tag--ok">Enrolled</span>
-              </div>
-              <div class="mock-kpis">
-                <div><small>Application</small><b>APP-2026-118</b></div>
-                <div><small>First invoice</small><b>₹18,500</b></div>
-                <div><small>Documents</small><b>4 / 4</b></div>
-              </div>
-              <div class="mock-rows">
-                <div><span class="dot dot--gold"></span>Enquiry logged<em>12 Jun</em></div>
-                <div><span class="dot dot--gold"></span>Campus visit &amp; interaction<em>18 Jun</em></div>
-                <div><span class="dot dot--gold"></span>Documents verified<em>21 Jun</em></div>
-                <div><span class="dot"></span>Fee invoice raised<em>Today</em></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="phone" aria-hidden="true">
-          <div class="phone__notch"></div>
-          <small>Parent app</small>
-          <b>Fees summary</b>
-          <div class="phone__row"><span>Term 2</span><span>₹18,500</span></div>
-          <div class="phone__row"><span>Paid</span><span class="ok">₹12,000</span></div>
-          <div class="phone__bar"><i style="width:65%"></i></div>
-          <div class="phone__btn">Pay now</div>
-        </div>
-        <ol class="steps-strip">
-          <li class="is-on"><span>01</span>Enquiry</li>
-          <li class="is-on"><span>02</span>Admission</li>
-          <li><span>03</span>Student record</li>
-        </ol>
-        <p class="caption">Illustration with sample data</p>
+      <!-- Classroom drawn in chalk: drawn stroke by stroke on load, layers move at different speeds on scroll -->
+      <div class="hero__visual hero__art">
+        <svg class="chalk-art" viewBox="0 0 600 480" role="img" aria-label="Chalk drawing of a framed chalkboard reading Edunex Smart School 360, surrounded by school doodles: rocket, paper plane, light bulb, graduation cap, alarm clock, books, globe, atom, calculator, flask, calendar, trophy, pencil, ABC blocks, ruler, apple, magnifying glass and football">
+          <!-- Layer 1: the framed board with the product name -->
+          <g class="layer" data-depth="0.05">
+            <rect class="c-wood" x="162" y="142" width="276" height="186" rx="8"/>
+            <rect class="c-wood board" x="173" y="153" width="254" height="164" rx="4"/>
+            <path class="c-wood" d="M154 334h292"/>
+            <text class="t-y" x="300" y="190" text-anchor="middle" font-family="Caveat, cursive" font-size="30" font-weight="700">Edunex</text>
+            <text class="t-w" x="300" y="234" text-anchor="middle" font-family="Cabin Sketch, cursive" font-size="38" font-weight="700">Smart School</text>
+            <text class="t-y" x="300" y="296" text-anchor="middle" font-family="Cabin Sketch, cursive" font-size="58" font-weight="700">360°</text>
+            <path class="c-w" d="M236 244c20-5 40 4 64 0s44-5 64 0"/>
+            <path class="c-w" d="M190 330h16"/>
+            <rect class="c-wood" x="384" y="323" width="32" height="8" rx="2"/>
+            <path class="c-w" d="M192 172l3 3m0-3-3 3M404 296l3 3m0-3-3 3"/>
+          </g>
+          <!-- Layer 2: doodles along the top and sides -->
+          <g class="layer" data-depth="0.14">
+            <g transform="translate(64 80) rotate(35)">
+              <path class="c-w" d="M0-30C10-20 10 10 8 18H-8C-10 10-10-20 0-30z"/>
+              <circle class="c-b" cx="0" cy="-8" r="5"/>
+              <path class="c-w" d="M-8 8-16 22-8 18M8 8 16 22 8 18"/>
+              <path class="c-o" d="M-5 18Q0 34 5 18"/>
+            </g>
+            <path class="c-w" d="M130 50 178 30 160 62zM130 50l30-4v16"/>
+            <path class="c-w" d="M126 56c-16 10-24-6-32 4" stroke-dasharray="3 6"/>
+            <path class="c-y" d="M240 80c-12-12-8-34 10-34s22 22 10 34v8h-20zM242 94h16M244 99h12M250 34v-9M228 44l-6-5M272 44l6-5"/>
+            <path class="c-w" d="M310 58 338 46l28 12-28 12zM322 64v12c0 6 32 6 32 0V64"/>
+            <path class="c-y" d="M366 58v14"/>
+            <circle class="c-w" cx="432" cy="78" r="22"/>
+            <path class="c-w" d="M414 58a8 8 0 0 1 12-6M450 58a8 8 0 0 0-12-6M432 78V66M432 78l9 5M418 98l-5 6M446 98l5 6"/>
+            <path class="c-p" d="M518 72V46l20-6v26M518 52l20-6"/>
+            <ellipse class="c-p" cx="513" cy="72" rx="5" ry="4"/>
+            <ellipse class="c-p" cx="533" cy="66" rx="5" ry="4"/>
+            <path class="c-w" d="M568 96V74q8 4 10 12"/>
+            <ellipse class="c-w" cx="563" cy="96" rx="5" ry="4"/>
+            <path class="c-w" d="M44 170c12-8 26-8 38 0 12-8 26-8 38 0v34c-12-8-26-8-38 0-12-8-26-8-38 0zM82 170v34M51 180h22M51 188h22M91 180h22M91 188h22"/>
+            <circle class="c-b" cx="74" cy="270" r="26"/>
+            <ellipse class="c-b" cx="74" cy="270" rx="11" ry="26"/>
+            <path class="c-b" d="M48 270h52M74 296v10M60 308h28"/>
+            <ellipse class="c-w" cx="136" cy="250" rx="17" ry="6"/>
+            <ellipse class="c-w" cx="136" cy="250" rx="17" ry="6" transform="rotate(60 136 250)"/>
+            <ellipse class="c-w" cx="136" cy="250" rx="17" ry="6" transform="rotate(-60 136 250)"/>
+            <circle class="c-y" cx="136" cy="250" r="2.5"/>
+            <rect class="c-w" x="478" y="160" width="44" height="58" rx="5"/>
+            <rect class="c-g" x="485" y="167" width="30" height="12" rx="2"/>
+            <path class="c-w" d="M488 192h.1M500 192h.1M512 192h.1M488 203h.1M500 203h.1M512 203h.1M488 214h.1M500 214h.1M512 214h.1"/>
+            <path class="c-w" d="M558 160v18l-14 26c-3 6 1 10 7 10h28c6 0 10-4 7-10l-14-26v-18M553 160h22"/>
+            <path class="c-b" d="M549 197h32"/>
+            <circle class="c-b" cx="562" cy="188" r="2"/>
+            <circle class="c-b" cx="570" cy="180" r="1.5"/>
+            <rect class="c-w" x="478" y="252" width="52" height="46" rx="4"/>
+            <path class="c-w" d="M478 266h52M490 246v10M518 246v10"/>
+            <text class="t-r" x="504" y="292" text-anchor="middle" font-family="Cabin Sketch, cursive" font-size="20" font-weight="700">12</text>
+            <path class="c-y" d="M548 262h32v8c0 12-6 20-16 20s-16-8-16-20zM548 268c-9 0-9 12 0 12M580 268c9 0 9 12 0 12M564 290v8M554 298h20v7h-20z"/>
+          </g>
+          <!-- Layer 3: doodles along the bottom -->
+          <g class="layer" data-depth="0.24">
+            <g transform="translate(28 452) rotate(-35)">
+              <rect class="c-p" x="-13" y="-7" width="13" height="14" rx="3"/>
+              <path class="c-y" d="M0-7h70v14H0zM0-2h70M0 2h70"/>
+              <path class="c-wood" d="M70-7 88 0 70 7"/>
+              <path class="c-w" d="M83-2 88 0 83 2"/>
+            </g>
+            <rect class="c-r" x="140" y="400" width="34" height="34" rx="3"/>
+            <rect class="c-b" x="178" y="400" width="34" height="34" rx="3"/>
+            <rect class="c-g" x="159" y="364" width="34" height="34" rx="3"/>
+            <text class="t-r" x="157" y="426" text-anchor="middle" font-family="Cabin Sketch, cursive" font-size="22" font-weight="700">A</text>
+            <text class="t-b" x="195" y="426" text-anchor="middle" font-family="Cabin Sketch, cursive" font-size="22" font-weight="700">B</text>
+            <text class="t-g" x="176" y="390" text-anchor="middle" font-family="Cabin Sketch, cursive" font-size="22" font-weight="700">C</text>
+            <path class="c-w" d="M240 352h120v18H240zM252 352v7M264 352v10M276 352v7M288 352v10M300 352v7M312 352v10M324 352v7M336 352v10M348 352v7"/>
+            <path class="c-r" d="M300 402c-6-5-16-2-16 7s8 15 12 15c2 0 3-1 4-1s2 1 4 1c4 0 12-7 12-15s-10-12-16-7zM300 402c0-5 2-8 5-10"/>
+            <path class="c-g" d="M303 396c6-6 12-4 14-2-4 6-10 6-14 2z"/>
+            <circle class="c-w" cx="364" cy="418" r="14"/>
+            <path class="c-w" d="M374 428l14 14"/>
+            <circle class="c-w" cx="440" cy="422" r="24"/>
+            <path class="c-w" d="M440 412l9 7-4 10h-10l-4-10zM440 412v-14M449 419l12-4M445 429l7 10M435 429l-7 10M431 419l-12-4"/>
+            <rect class="c-r" x="492" y="434" width="80" height="16" rx="3"/>
+            <rect class="c-b" x="498" y="418" width="70" height="16" rx="3"/>
+            <rect class="c-y" x="494" y="402" width="76" height="16" rx="3"/>
+            <path class="c-w" d="M506 402v16M560 418v16M502 434v16"/>
+          </g>
+          <!-- Layer 4: sparkles -->
+          <g class="layer" data-depth="0.34">
+            <path class="c-y" d="M204 112l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/>
+            <path class="c-w" d="M470 128l2 5 5 1-4 3 1 5-4-2-4 2 1-5-4-3 5-1z"/>
+            <path class="c-y" d="M24 330l2 5 5 1-4 3 1 5-4-2-4 2 1-5-4-3 5-1z"/>
+            <path class="c-p" d="M464 344l2 5 5 1-4 3 1 5-4-2-4 2 1-5-4-3 5-1z"/>
+            <path class="c-w" d="M586 130v8m-4-4h8M150 340v8m-4-4h8M24 120v8m-4-4h8M592 360v8m-4-4h8"/>
+          </g>
+        </svg>
       </div>
     </div>
 
@@ -160,10 +225,15 @@
         <div class="value"><span class="num">03</span><div><h3>Give every role its own view.</h3><p>Staff and families see only what they should.</p></div></div>
       </div>
     </div>
+    <div class="ledge" aria-hidden="true">
+      <span class="chalk chalk--w"></span><span class="chalk chalk--y"></span><span class="chalk chalk--p"></span><span class="chalk chalk--b"></span>
+      <span class="duster"></span>
+    </div>
   </section>
 
   <!-- ============================ PRODUCT TOUR ============================ -->
   <section class="section" id="tour">
+    <div class="doodles" aria-hidden="true"><svg class="doodle dd-tl doodle--y m-glow" aria-hidden="true" focusable="false"><use href="#d-bulb"/></svg><svg class="doodle dd-tr m-float doodle--text" aria-hidden="true" focusable="false"><use href="#d-sum"/></svg></div>
     <div class="wrap">
       <div class="head">
         <p class="kicker">Product tour</p>
@@ -196,7 +266,7 @@
             <div><small>Enquiry · 24</small><i></i><i></i><i></i></div>
             <div><small>Visit · 11</small><i></i><i></i></div>
             <div><small>Documents · 7</small><i></i><i></i></div>
-            <div><small>Enrolled · 32</small><i class="gold"></i><i class="gold"></i><i class="gold"></i></div>
+            <div><small>Enrolled · 32</small><i class="hi"></i><i class="hi"></i><i class="hi"></i></div>
           </div>
         </div>
       </div>
@@ -215,7 +285,7 @@
         </div>
         <div class="screen" aria-hidden="true">
           <div class="screen__title"><b>Fee collection</b><span class="tag">Term 2</span></div>
-          <div class="bars-chart"><i style="height:45%"></i><i style="height:62%"></i><i style="height:58%"></i><i style="height:80%"></i><i style="height:72%"></i><i class="gold" style="height:92%"></i></div>
+          <div class="bars-chart"><i style="height:45%"></i><i style="height:62%"></i><i style="height:58%"></i><i style="height:80%"></i><i style="height:72%"></i><i class="hi" style="height:92%"></i></div>
           <div class="mini-rows"><div><span>Collected</span><b>₹14.2L</b></div><div><span>Pending</span><b>₹3.1L</b></div><div><span>Receipts today</span><b>46</b></div></div>
         </div>
       </div>
@@ -256,7 +326,7 @@
           <a href="#demo" class="link">See it in a demo <svg class="ico" width="16" height="16"><use href="#i-arrow"/></svg></a>
         </div>
         <div class="screen" aria-hidden="true">
-          <div class="screen__title"><b>Q3 · Explain photosynthesis</b><span class="tag tag--gold">Suggested 4 / 5</span></div>
+          <div class="screen__title"><b>Q3 · Explain photosynthesis</b><span class="tag tag--accent">Suggested 4 / 5</span></div>
           <div class="sheet-lines"><i style="width:92%"></i><i style="width:78%"></i><i style="width:86%"></i><i style="width:54%"></i></div>
           <div class="note"><svg class="ico" width="15" height="15"><use href="#i-sparkle"/></svg>Covers light and chlorophyll; misses the role of carbon dioxide.</div>
         </div>
@@ -267,6 +337,7 @@
 
   <!-- ============================== MODULES ============================== -->
   <section class="section section--raised" id="modules">
+    <div class="doodles" aria-hidden="true"><svg class="doodle dd-tl m-bob" aria-hidden="true" focusable="false"><use href="#d-books"/></svg><svg class="doodle dd-br doodle--b m-bob" aria-hidden="true" focusable="false"><use href="#d-ruler"/></svg></div>
     <div class="wrap">
       <div class="head">
         <p class="kicker">Modules</p>
@@ -306,6 +377,7 @@
 
   <!-- =============================== ROLES =============================== -->
   <section class="section" id="roles">
+    <div class="doodles" aria-hidden="true"><svg class="doodle dd-tr doodle--y m-bob" aria-hidden="true" focusable="false"><use href="#d-cap"/></svg><svg class="doodle dd-bl doodle--p m-twinkle" aria-hidden="true" focusable="false"><use href="#d-star"/></svg></div>
     <div class="wrap">
       <div class="head">
         <p class="kicker">Who it’s for</p>
@@ -360,11 +432,13 @@
   </section>
 
   <!-- ============================== PRICING ============================== -->
-  <section class="section section--raised" id="pricing">
+  <section class="section section--raised pricing-board" id="pricing">
+    <div class="doodles" aria-hidden="true"><svg class="doodle dd-tl doodle--y m-twinkle" aria-hidden="true" focusable="false"><use href="#d-star"/></svg><svg class="doodle dd-tr m-wiggle" aria-hidden="true" focusable="false"><use href="#d-pencil"/></svg></div>
     <div class="wrap">
+      <div class="board-sign" aria-hidden="true"><span>Price list</span></div>
       <div class="head">
         <p class="kicker">Pricing <span class="sample-flag" title="Replace these with your real prices in js/main.js">Sample prices</span></p>
-        <h2 class="h2">Pick the plan that fits.<br><span class="dim">Pay only per student.</span></h2>
+        <h2 class="h2">Pick the plan that fits.<br><span class="hl">Pay only per student.</span></h2>
         <p class="sub">Pay per active student, billed yearly. Every plan includes setup, staff training and role-based access for staff, parents and students.</p>
       </div>
 
@@ -380,10 +454,11 @@
 
   <!-- ============================== ADD-ONS ============================== -->
   <section class="section" id="addons">
+    <div class="doodles" aria-hidden="true"><svg class="doodle dd-tr doodle--b m-sway" aria-hidden="true" focusable="false"><use href="#d-globe"/></svg></div>
     <div class="wrap">
       <div class="head">
         <p class="kicker">Add-ons</p>
-        <h2 class="h2">Make it<br><span class="metal">your school’s own.</span></h2>
+        <h2 class="h2">Make it<br><span class="hl">your school’s own.</span></h2>
         <p class="sub">Add a school website or an Android app in your school’s name. Priced separately from the software plan.</p>
       </div>
       <div class="addons">
@@ -407,6 +482,7 @@
 
   <!-- ============================= ESTIMATOR ============================= -->
   <section class="section section--raised" id="estimate">
+    <div class="doodles" aria-hidden="true"><svg class="doodle dd-br m-float doodle--text" aria-hidden="true" focusable="false"><use href="#d-math"/></svg></div>
     <div class="wrap estimate">
       <div class="estimate__form">
         <p class="kicker"><svg class="ico" width="15" height="15"><use href="#i-sliders"/></svg> Build an estimate</p>
@@ -435,7 +511,7 @@
           <div><span>One-time add-ons</span><b data-est-add>₹0</b></div>
           <div><span>After the first year</span><b data-est-after>₹0</b></div>
         </div>
-        <a href="#demo" class="btn btn--gold" data-est-cta>Discuss this estimate <svg class="ico" width="16" height="16"><use href="#i-arrow"/></svg></a>
+        <a href="#demo" class="btn btn--accent" data-est-cta>Discuss this estimate <svg class="ico" width="16" height="16"><use href="#i-arrow"/></svg></a>
         <p class="fineprint">Indicative only. Final scope and price are confirmed in your quotation.</p>
       </div>
     </div>
@@ -443,6 +519,7 @@
 
   <!-- =========================== GETTING STARTED =========================== -->
   <section class="section" id="start">
+    <div class="doodles" aria-hidden="true"><svg class="doodle dd-tr doodle--y m-drive" aria-hidden="true" focusable="false"><use href="#d-bus"/></svg><svg class="doodle dd-bl m-none" aria-hidden="true" focusable="false"><use href="#d-arrow"/></svg></div>
     <div class="wrap">
       <div class="head">
         <p class="kicker">Getting started</p>
@@ -460,6 +537,7 @@
 
   <!-- ================================ FAQ ================================ -->
   <section class="section section--raised" id="faq">
+    <div class="doodles" aria-hidden="true"><svg class="doodle dd-bl doodle--p m-bob" aria-hidden="true" focusable="false"><use href="#d-apple"/></svg></div>
     <div class="wrap faq">
       <div class="head head--left">
         <p class="kicker">Before you decide</p>
@@ -483,11 +561,11 @@
 
   <!-- ============================== DEMO FORM ============================== -->
   <section class="section demo" id="demo">
-    <div class="hero__glow hero__glow--low" aria-hidden="true"></div>
+    <div class="doodles" aria-hidden="true"><svg class="doodle dd-school m-none" aria-hidden="true" focusable="false"><use href="#d-school"/></svg><svg class="doodle dd-plane doodle--y m-fly" aria-hidden="true" focusable="false"><use href="#d-plane"/></svg></div>
     <div class="wrap demo__grid">
       <div>
         <p class="kicker">See the fit before you decide</p>
-        <h2 class="h2">Your school.<br>Your questions.<br><span class="metal">Your demo.</span></h2>
+        <h2 class="h2">Your school.<br>Your questions.<br><span class="hl">Your demo.</span></h2>
         <p class="sub">Bring the workflow you want to improve. We’ll show how Edunex handles it, then explain the plan and setup your school would need.</p>
         <ol class="demo__steps">
           <li><span class="num">01</span><div><b>Start with your school</b><p>Student count, current tools and daily challenges.</p></div></li>
@@ -521,7 +599,7 @@
         </div>
         <label class="field"><span>City, preferences or requirements</span><textarea name="message" rows="3"></textarea></label>
         <p class="form__error" role="alert" hidden></p>
-        <button type="submit" class="btn btn--gold btn--block">Request my demo <svg class="ico" width="17" height="17"><use href="#i-arrow"/></svg></button>
+        <button type="submit" class="btn btn--accent btn--block">Request my demo <svg class="ico" width="17" height="17"><use href="#i-arrow"/></svg></button>
         <p class="form__hint">Please don’t share student records here.</p>
         <div class="form__done" hidden role="status">
           <svg class="ico" width="22" height="22"><use href="#i-check"/></svg>
@@ -535,7 +613,7 @@
 <footer class="foot">
   <div class="wrap foot__inner">
     <a href="#top" class="brand">
-      <img src="assets/logo-gold.svg" width="34" height="34" alt="">
+      <img src="assets/logo-chalk.svg?v=2" width="34" height="34" alt="">
       <span class="brand__text"><span class="brand__name">EDUNEX</span><span class="brand__tag">Smart School 360</span></span>
     </a>
     <nav class="foot__links" aria-label="Footer">
@@ -549,6 +627,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=3"></script>
+<script src="js/main.js?v=20"></script>
 </body>
 </html>
